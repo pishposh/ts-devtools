@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <title>blargh</title>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+
+// from http://stackoverflow.com/questions/202605 "disfated":
+String.prototype.repeat = function(count) {
+  if (count < 1) return '';
+  var result = '', pattern = this.valueOf();
+  while (count > 0) {
+    if (count & 1) result += pattern;
+    count >>= 1, pattern += pattern;
+  }
+  return result;
+};
+
+var KILOBYTE = "x".repeat(1024);
+var MEGABYTE = KILOBYTE.repeat(1024);
+
+// prepare large constants here so as not to waste time building strings in
+// onunload/onbeforeunload (beware Chrome's 1-second hang timeout):
+var ONE_BYTE = "x"
+var ONE_MEG = MEGABYTE
+var TEN_MEGS = MEGABYTE.repeat(10);
+var FIVE_MEGS = MEGABYTE.repeat(5);
+var TWENTY_MEGS = MEGABYTE.repeat(20);
+
+$.support.cors = true;
+
+function send_request(msg, payload, delay_ms, force_synchronous) {
+  console && console.log("send_request starting");
+  $.ajax({
+    url: "http://splinter.local:1337/",
+    type: "POST",
+    data: {
+      msg: msg,
+      payload: payload,
+      delay_ms: delay_ms
+    },
+    async: !force_synchronous
+  }).done(function(msg){
+    console && console.log("xhr: done")
+  }).fail(function(jqXHR, textStatus){
+    console && console.log("xhr: " + textStatus)
+  });
+  console && console.log("send_request complete");
+}
+
+window.onbeforeunload = function() {
+  console && console.log("onbeforeunload starting");
+  send_request("beforeunload", FIVE_MEGS, 0, true);
+  console && console.log("onbeforeunload done");
+  
+  return "Hello from onbeforeunload!";
+}
+
+window.onunload = function() {
+  console && console.log("onunload starting");
+  send_request("unload", FIVE_MEGS, 0, true);
+  console && console.log("onunload done");
+}
+
+  </script>
+
+</head>
+<body style="font-family: 'Helvetica Neue', Helvetica">
+  <p>(make sure delayed_response.js is running on splinter.local)</p>
+  
+  <div style="font-size: 48px">
+    <p>
+      xhr async
+      <a href="#" onclick="send_request('async', TEN_MEGS, 0, false); return false">10M</a>,
+      <a href="#" onclick="send_request('async', FIVE_MEGS, 0, false); return false">5M</a>,
+      <a href="#" onclick="send_request('async', ONE_MEG, 0, false); return false">1M</a>,
+      <a href="#" onclick="send_request('async', ONE_BYTE, 0, false); return false">1b</a>
+    </p>
+    
+    <p>
+      xhr sync
+      <a href="#" onclick="send_request('sync', TEN_MEGS, 0, true); return false">10M</a>,
+      <a href="#" onclick="send_request('sync', FIVE_MEGS, 0, true); return false">5M</a>,
+      <a href="#" onclick="send_request('sync', ONE_MEG, 0, true); return false">1M</a>,
+      <a href="#" onclick="send_request('sync', ONE_BYTE, 0, true); return false">1b</a>
+    </p>
+    
+    <p>
+      xhr async with delay
+      <a href="#" onclick="send_request('async', TEN_MEGS, 5000, false); return false">10M</a>,
+      <a href="#" onclick="send_request('async', FIVE_MEGS, 5000, false); return false">5M</a>,
+      <a href="#" onclick="send_request('async', ONE_MEG, 5000, false); return false">1M</a>,
+      <a href="#" onclick="send_request('async', ONE_BYTE, 5000, false); return false">1b</a>
+    </p>
+    
+    <p>
+      xhr sync with delay
+      <a href="#" onclick="send_request('sync', TEN_MEGS, 5000, true); return false">10M</a>,
+      <a href="#" onclick="send_request('sync', FIVE_MEGS, 5000, true); return false">5M</a>,
+      <a href="#" onclick="send_request('sync', ONE_MEG, 5000, true); return false">1M</a>,
+      <a href="#" onclick="send_request('sync', ONE_BYTE, 5000, true); return false">1b</a>
+    </p>
+    
+    <p>
+      <a href="http://www.twitter.com/" target="_top">Here, have a link!</a>
+    </p>
+  </div>
+  
+</body> 
+</html>
+ 
