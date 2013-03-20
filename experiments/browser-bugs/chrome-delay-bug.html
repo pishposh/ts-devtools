@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--
+issue #22727 (rejected, unfixable) - 11/22/2011
+
+Under Chrome 14.0.835.163 (WebKit/535.1), if a javascript alert is left
+onscreen for longer than a few seconds, script execution will pause on the
+next assignment to window.location.href until approximately the same amount of
+time has passed as the alert was left onscreen, up to about a minute (other
+javascript statements will execute as normal, however). This does not happen
+in Chrome 15, nor Safari 5.1.1 (WebKit/534.51.22), nor Safari 5.1.1 using
+WebKit/535.10+ (r100987). See
+http://ham.REDACTED.org/experimental/ken/chromedelay.html
+
+The only real "fix" I can imagine here is either to rebuild the site without
+javascript alerts, or rebuild the site without javascript location.href
+assignments. This browser behavior hopefully won't be too much of a problem
+going forwards, since it only affects old versions of Chrome, which updates
+itself automatically.
+-->
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Chrome 14 delay</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<script>
+
+var x = window;
+
+$(function() {
+	$("#scriptme").click(function() { window.alert("wait 15 seconds"); });
+	
+	$("li.test > *:first-child").each(function() {
+		var outerHTML = this.outerHTML || $("<div>").append($(this).clone()).html();
+		var tagHTML = outerHTML.substr(0,outerHTML.lastIndexOf(this.innerHTML));
+		
+		$(this).after( $("<code>").text(tagHTML) );
+	});
+	
+	$("#user-element-input").keyup(function() {
+		$("#user-element").html( $(this).val() )
+	});
+	$("#user-element").html( $("#user-element-input").val() );
+});
+
+// $(window).bind("beforeunload", function() { return "leaving now" });
+
+function goToPage() {
+	window.location.href='test.asp'
+}
+
+		</script>
+		<style>
+		
+body  { background: #eee; font-family: calibri, helvetica, sans-serif; }
+body, html { margin: 0; padding: 0; width: 100% }
+
+*.tests > li  { margin: 1em 0; padding: 0 }
+
+code   { display: block; font: 80% consolas, menlo, monaco, monospace; font-weight: normal; color: #666 }
+
+#one,
+#two {
+	display: block;
+	width: 50%;
+	box-sizing: border-box;
+	padding: 0 2em;
+}
+
+div#one { float: left }
+div#two { float: right }
+
+div#other { width: 50%; margin: 2em auto; clear: both; }
+
+#user-element-input {
+	width: 100%;
+	box-sizing: border-box;
+	font: 80% consolas, menlo, monaco, monospace; font-weight: normal; color: #666
+}
+		</style>
+	</head>
+	<body>
+		<div id="one">
+			<h2>1. Show alert (wait 15 seconds to click OK):</h2>
+			
+			<ul class="tests">
+			
+				<li class="test"><a href="javascript:alert('wait 15 seconds')">Show Alert</a>
+					
+				<li class="test"><a href="javascript:void(0)" onclick="window.alert('wait 15 seconds')">Show Alert</a>
+					
+				<li class="test"><button onclick="alert('wait 15 seconds')">Show Alert</button>
+					
+				<li class="test"><a href="javascript:void(window.alert('wait 15 seconds'))">Show Alert</a>
+				
+				<li class="test"><a href="javascript:window.alert('wait 15 seconds'); void(0);">Show Alert</a>
+					
+				<li class="test"><span style="border:1px dotted gray" onmouseover="javascript:window.alert('wait 15 seconds');">Show Alert on Mouseover</span>
+					
+				<li class="test"><span style="border:1px dotted gray" id="scriptme">Click to Show Alert (listener added after document load)</span>
+				
+			</ul>
+		</div>
+		<div id="two">
+			<h2>2. Go to another page:</h2>
+			
+			<ul class="tests">
+			
+				<li class="test"><a href="javascript:void(0)" onclick="window.location.assign('test.asp')">Link via JS onclick</a>
+				
+				<li class="test"><a href="#" onclick="window.location.assign('test.asp')">Link via JS onclick</a>
+				
+				<li class="test"><a href="javascript:void(window.location.href='test.asp')">Link via JS href</a>
+				
+				<li class="test"><a href="javascript:window.location.href='test.asp'; void(0);">Link via JS href</a>
+				
+				<li class="test"><a href="javascript:window.location.href='test.asp'">Link via JS href</a>
+				
+				<li class="test"><button onclick="window.location.href='test.asp'">Go to Link</button>
+				
+				<li class="test"><a href="javascript:void( window.setTimeout( &quot;window.location.href='test.asp'&quot;, 0 ) )">Link via setTimeout via JS href</a>
+			</ul>
+		</div>
+		<div id="other">
+			<h2>Or try these:</h2>
+			
+			<ul class="tests">
+				
+				<li>
+					<div id="user-element"></div>
+					<textarea id="user-element-input">&lt;a href="javascript:void(0)" onclick="window.location.href='http://www.nytimes.com/';"&gt;edit me&lt;/a&gt;</textarea>
+					
+				<li class="test"><a href="javascript:void( function(){ alert('clicked'); window.location.href='test.asp'; }() )">Alert and link via JS href</a>
+				
+				<li class="test"><a href="javascript:void(window.location.reload())">Reload page via JS href</a>
+				
+				<li class="test"><a href="javascript:void(history.go(0))">JS href history.go(0)</a>
+				
+				<li class="test"><a href="./test.asp">Direct link as href</a>
+			</ul>
+		</div>
+	</body>
+</html>

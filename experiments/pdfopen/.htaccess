@@ -1,0 +1,10 @@
+<Files test-cdattach.pdf>
+	Header Set "Content-Disposition" "attachment;filename=test.pdf"
+</Files>
+
+Header Set "X-Blargh" "blargh blargh blargh"
+Header Set "Cache-Control" "store, no-cache, must-revalidate, post-check=0, pre-check=0"
+Header Set "Expires" "Sun, 19 Nov 1978 05:00:00 GMT"
+
+Redirect /~kkaji/pdfopen/test-redirect.pdf http://splinter.local/~kkaji/pdfopen/test.pdf
+Redirect /~kkaji/pdfopen/test-cdattach-redirect.pdf http://splinter.local/~kkaji/pdfopen/test-cdattach.pdf

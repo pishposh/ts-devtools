@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<!-- THIS IS A TEST OF BADNESS. CODE WITHIN IS FAR FROM BEST PRACTICE. -->
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Byebye</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+	<style>
+body { background: #eee; }
+*.tests > li  { margin: 1em 0; padding: 0 }
+code   { display: block; font: 80% consolas, menlo, monaco, monospace; font-weight: normal; color: #666 }
+	</style>
+	<script>
+
+$(function() {
+	$("#scriptme").click(function() { window.alert("wait 15 seconds"); });
+	
+	$("li.test > *:first-child").each(function() {
+		var outerHTML = this.outerHTML || $("<div>").append($(this).clone()).html();
+		var tagHTML = outerHTML.substr(0,outerHTML.lastIndexOf(this.innerHTML));
+		
+		$(this).after( $("<code>").text(tagHTML) );
+	});
+});
+
+$(window).bind("beforeunload", function(){
+	return "Blah blah blah.";
+});
+
+	</script>
+</head>
+<body>
+	<h1>Byebye</h1>
+	
+	<p>I dare you to close me.</p>
+	
+	<ul class="tests">
+	
+		<li class="test"><a href="javascript:void(window.close());">Close Window</a>
+			
+		<li class="test"><button onclick="(function(){window.close(); return false;})();">Close Window</button>
+		
+	</ul>
+</body>
+</html>

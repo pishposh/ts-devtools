@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>textarea event test</title>
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+		<style>
+body {
+	background: #e0dcdd;
+	font-family: calibri, helvetica, sans-serif;
+}
+
+textarea.test {
+	font: inherit;
+	box-sizing: border-box;
+	padding: 0.25em;
+	width: 100%; max-width: 30em;
+	height: 6em;
+	display: block
+}
+		</style>
+		<script>
+
+$(function(){
+	$("#two textarea.test").keyup(function(){
+		if (window.console) console.log("keyup");
+		$('#two .length').text( $(this).val().length );
+	});
+	
+	var el;
+	
+	el = $('#three textarea.test')[0];
+	el.onkeyup = el.oninput = el.onpaste = el.onchange;
+	
+	el = $('#four textarea.test')[0];
+	el.onkeyup = el.onchange;
+	
+	el = $('#five textarea.test')[0];
+	el.oninput = el.onchange;
+	
+	el = $('#six textarea.test')[0];
+	el.onkeyup = el.oninput = el.onchange;
+	
+	el = $('#seven textarea.test')[0];
+	el.onpaste = el.onchange;
+});
+
+function handleOnChange(obj) {
+	if (window.console) {
+		if (window.event) {
+			console.log("handleOnChange() window.event=%s, window.event.type=%s", window.event, window.event.type);
+		} else {
+			console.log("handleOnChange() window.event=%s", window.event);
+		}
+	}
+	
+	$(obj).prev(".length").text( $(obj).val().length );
+}
+
+		</script>
+	</head>
+	<body>
+
+<p id="one"><b>Vanilla textarea</b>
+<textarea class="test"></textarea>
+</p>
+
+<p id="two"><b>Jquery-assigned onkeyup</b> (<span class="length">0</span> characters)
+<textarea class="test">oeui&ouml;qqqe</textarea>
+</p>
+
+<p id="three"><b>All event handlers copied from onchange at load</b> (<span class="length">0</span> characters)
+<textarea class="test" onchange="handleOnChange(this)"></textarea>
+
+<p id="four"><b>Onkeyup copied from onchange at load</b> (<span class="length">0</span> characters)
+<textarea class="test" onchange="handleOnChange(this)"></textarea>
+
+<p id="five"><b>Oninput copied from onchange at load</b> (<span class="length">0</span> characters)
+<textarea class="test" onchange="handleOnChange(this)"></textarea>
+
+<p id="six"><b>Onkeyup and oninput copied from onchange at load</b> (<span class="length">0</span> characters)
+<textarea class="test" onchange="handleOnChange(this)"></textarea>
+
+<p id="seven"><b>Onpaste copied from onchange at load</b> (<span class="length">0</span> characters)
+<textarea class="test" onchange="handleOnChange(this)"></textarea>
+
+<p id="eight"><b>All event handlers set from attributes</b> (<span class="length">0</span> characters)
+<textarea class="test" onkeyup="handleOnChange(this)" oninput="handleOnChange(this)" onpaste="handleOnChange(this)" onchange="handleOnChange(this)"></textarea>
+
+<p id="nine"><b>Onkeydown set from attribute</b> (<span class="length">0</span> characters)
+<textarea class="test" onkeydown="handleOnChange(this)"></textarea>
+
+	</body>
+</html>

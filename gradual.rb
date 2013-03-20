@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+#
+# gradually let through more and more non-ascii text
 
 s = STDIN.read
 n = s.length

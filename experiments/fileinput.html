@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>file input test</title>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	
+	<script>
+	
+$(function(){
+	$("#test").change(function(){
+		$("#dot-value").text(this.value);
+		$("#dot-files").text(this.files ? (this.files[0] ? this.files[0].name : "<no .files[0]>") : "<no .files property>");
+	});
+});
+
+	</script>
+	<style>
+body {
+	background: #eee;
+	font: 1em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+form {
+	text-align: center;
+}
+
+dt {
+	font-weight: bold;
+	width: 40%;
+	text-align: right;
+	float: left;
+	display: block;
+	clear: both;
+}
+
+dt:after { content: ":"; }
+
+dd {
+	text-align: left;
+	margin-left: 40%;
+	padding-left: 0.5em;
+}
+
+
+	</style>
+</head>
+<body>
+
+<form>
+	<p>
+		<input type="file" id="test">
+	</p>
+</form>
+
+<dl>
+	<dt>this.value</dt>
+	<dd id="dot-value"></dd>
+
+	<dt>this.files[0].name</dt>
+	<dd id="dot-files">qjkqjkjqk</dd>
+</dl>
+	
+</body>
+</html>

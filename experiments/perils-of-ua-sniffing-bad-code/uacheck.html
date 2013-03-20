@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script language="VBScript">
+	function uaSupport_SiteFunctions(userAgent)
+		''// REDACTED -- see garbage
+		uaSupport_SiteFunctions = "redirect"
+	end function
+</script>
+<script type="text/javascript">
+	function uaSupport_JavaScript(userAgent) {
+		// REDACTED -- see garbage
+		return "supported";
+	}
+</script>
+
+<script>
+$(function(){
+	$.get("./ua-strings.txt", function(data){
+		var uaStrings = data.split("\n");
+		for (var i = 0; i < uaStrings.length; i++) {
+			var ua = uaStrings[i];
+			var vbResult = uaSupport_SiteFunctions(ua);
+			var jsResult = uaSupport_JavaScript(ua);
+			
+			if (vbResult === "redirect" && jsResult === "supported") {
+				var node = $("<p><span class=\"ua\"></span><span class=\"vbResult\"></span>"+
+				             "<span class=\"jsResult\"></span></p>");
+				node.find(".ua").text(ua);
+				node.find(".vbResult").text(vbResult);
+				node.find(".jsResult").text(jsResult);		
+				$("div#results").append(node);
+			}
+		}
+	});
+})
+</script>
+	<title></title>
+</head>
+<style>
+.ua:after { content: " ... "; }
+.vbResult:before { content: "vb " }
+.vbResult:after  { content: ", "; }
+.jsResult:before { content: "js " }
+</style>
+<body>
+
+<p>must run in IE</p>
+
+<div id="results"></div>
+
+</body>

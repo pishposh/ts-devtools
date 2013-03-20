@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>PDF open test</title>
+	<style>
+.no {
+	text-decoration: line-through;
+	opacity: 0.5;
+}
+.yes {
+	font-weight: bold;
+}
+.yes:after { content: "*"; }
+	</style>
+	<script>
+function open_win(url) {
+	window.open(url, "_blank", "toolbar=no,location=no,status=no,menubar=yes,scrollbars=yes,width=720,height=450,left=200,top=150,resizable=yes")
+}
+	</script>
+</head>
+<body>
+	No special headers:
+	<ul>
+		<li class="no"><a href="./test.pdf">vanilla</a></li>
+		<li><a href="./test.pdf" target="_blank">target=_blank</a></li>
+		<li class="yes"><a href="javascript:void(0)" onclick="open_win('./test.pdf')">window.open()</a></li>
+		<li class="no"><a href="javascript:void(0)" onclick="window.location.href='./test.pdf'">location.href=</a></li>
+		<li class="no"><a href="javascript:void(0)" onclick="window.location.href='./test-redirect.pdf'">location.href=[301 redirect]</a></li>
+	</ul>
+	
+	<hr>
+	
+	Content-Disposition: attachment;filename=test.pdf
+	<ul>
+		<li class="yes"><a href="./test-cdattach.pdf">vanilla</a></li>
+		<li class="no"><a href="./test-cdattach.pdf" target="_blank">target=_blank</a></li>
+		<li class="no"><a href="javascript:void(0)" onclick="open_win('./test-cdattach.pdf')">window.open()</a></li>
+		<li class="yes"><a href="javascript:void(0)" onclick="window.location.href='./test-cdattach.pdf'">location.href=</a></li>
+		<li class="yes"><a href="javascript:void(0)" onclick="window.location.href='./test-cdattach-redirect.pdf'">location.href=[301 redirect]</a></li>
+	</ul>
+
+	<span class="yes"><a href="javascript:void(0)" onclick="iframe_download()">iframe download redirect</a></span>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>
+
+function iframe_download() {
+	$("body").append("<iframe src='./test-cdattach-redirect.pdf'></iframe>").load(function(){ download_finished() });
+}
+
+function download_finished() {
+	alert("blam");
+}
+</script>
+</body>
+</html>

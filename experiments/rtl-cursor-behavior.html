@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<title>DRF Template Builder</title>
+    <style>
+textarea {
+    display: block; width: 100%; box-sizing: border-box; height:10em; margin: 1em 0;
+}
+
+input[type="text"] {
+    display: block; width: 100%; box-sizing: border-box; margin: 1em 0;
+}
+    </style>
+</head>
+<body style="text-align: center">
+
+    <strong>LTR with pure Arabic:</strong>
+    <input type="text" dir="ltr" value="صِرَاطَ ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ">
+    <textarea dir="ltr">صِرَاطَ ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ</textarea>
+
+    <strong>RTL with pure Arabic:</strong>
+    <input type="text" dir="rtl" value="صِرَاطَ ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ">
+    <textarea dir="rtl">صِرَاطَ ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ</textarea>
+
+    <hr>
+
+    <strong>LTR with mixed runs:</strong>
+    <input type="text" dir="ltr" value="blah صِرَاطَ okay ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ">
+    <textarea dir="ltr">blah صِرَاطَ okay ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ</textarea>
+
+    <strong>RTL with mixed runs:</strong>
+    <input type="text" dir="rtl" value="blah صِرَاطَ okay ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ">
+    <textarea dir="rtl">blah صِرَاطَ okay ٱلَّذِينَ أَنعَمْتَ عَلَيهِمْ غَيرِ ٱلمَغضُوبِ عَلَيهِمْ وَلاَ ٱلضَّالِّينَ</textarea>
+
+</body>
+</html>

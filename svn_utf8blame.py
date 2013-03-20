@@ -1,5 +1,14 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
+#
+# Provide a path to a svn repo (local or remote), and this will tell you
+# who's committed bad utf. Requires svn_checkenc.py to determine which
+# set of checks to use for each file (this could be modularized).
+#
+# Excruciatingly slow.
+#
+# usage: svn_utf8blame.py [-h] [--svn SVN_LOCATION] [--revision REVISION] target
+
 
 from svn_checkenc import check_for_file
 import sys
@@ -10,7 +19,7 @@ from pprint import pprint
 import xml.etree.ElementTree as ETree
 
 CHOMP_RE = re.compile(br'(\r|\n|\r\n)$')
-LINEBREAK_RE = re.compile('\r\n|\r|\n')
+LINEBREAK_RE = re.compile('\r\n|\r|\n') # rstrip('\r\n') unreliable on TS code
 
 # TODO: MAKE EVERYTHING NOT SUCK
 
@@ -21,14 +30,14 @@ def main():
   import argparse
   
   parser = argparse.ArgumentParser()
-  parser.add_argument('--svn', type=str, help="path to svn", metavar="SVN_PATH")
+  parser.add_argument('--svn', type=str, help="location of svn binary", metavar="SVN_LOCATION")
   parser.add_argument('--revision', '-r', type=str, default="HEAD")
   parser.add_argument('target', type=str, default=".")
   args = parser.parse_args()
   
   svn, rev, target = args.svn, args.revision, args.target
   
-  # try to guess path to svnlook, if not provided:
+  # try to guess location of svn, if not provided:
   if svn is None and os.getenv('VISUALSVN_SERVER'):
     svn = os.getenv('VISUALSVN_SERVER') + r"\bin\svn.exe"
   if svn is None:

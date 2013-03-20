@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>DRF Template Builder</title>
+</head>
+<body>
+
+<script>
+
+    document.write("<p>hello from js</p>");
+    
+    var x = "<!--";
+
+    document.write("<p>goodbye from js</p>");
+
+</script>
+
+<p>IE (thru 9) won't display this.</p>
+
+<!-- The presence of this comment causes IE≤9 to ignore everything between
+     the declaration of x in the script block and the second closing script
+     tag; remove the comment, or even just its close tag (causing a runaway
+     comment in other browsers), and all is well in IE≤9. IE10 parsing
+     matches other browsers. -->
+
+<p>This either.</p>
+
+</script>
+
+<p>But after the spurious script close tag, finally, life.</p>
+
+</body>
+</html>

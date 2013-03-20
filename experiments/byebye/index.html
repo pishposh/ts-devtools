@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!-- THIS IS A TEST OF BADNESS. CODE WITHIN IS FAR FROM BEST PRACTICE. -->
+<html lang="en-US">
+<head>
+	<meta charset="utf-8">
+	<title>Byebye (Parent)</title>
+	<style>
+body { background: #eee; }
+	</style>
+	<script>
+function openChild() {
+	window.open("./child.html", "child");
+}
+	</script>
+</head>
+<body>
+	<p><a href="javascript:void(openChild());">Open child window</a></p>
+</body>
+</html>

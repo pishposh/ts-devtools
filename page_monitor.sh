@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# somehing quick and dirty
+# quick and dirty -- watch a webpage for changes
 # usage: page_monitor.sh http://www.example.com/page/to/watch text-to-grep myself@example.com
 
 while true; do

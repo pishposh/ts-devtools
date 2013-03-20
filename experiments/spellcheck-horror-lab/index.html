@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Spellcheck Horror Lab</title>
+	<style type="text/css">
+body {
+	background-color: #eee;
+	font-family: calibri;
+}
+	</style>
+	<style type="text/css">
+	
+#spellcheck-form textarea {
+	display: block;
+	width: 100%; height: 12em;
+	padding: 0.25em 0.5em;
+	font-family: helvetica, calibri, sans-serif;
+	box-sizing: border-box;
+}
+
+#spellcheck-form #submit-btn {
+	display: block; float: right;
+}
+
+#spellcheck {
+	width: 100%;
+	height: 75%;
+	border: none;
+	position: absolute;
+	margin: 0; padding: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+body {
+}
+
+	</style>
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+<script type="text/javascript"> 
+var foo; 
+function submitForm(which) { 
+	$("form#spellcheck-form").submit(); 
+} 
+</script> 
+</head>
+ 
+<body>
+	
+	<form id="spellcheck-form" action="spell-post.asp" method="post" target="spellcheck">
+		<textarea id="usertext" name="usertext" onchange="submitForm()" onkeyup="foo = setTimeout('submitForm()',500)" onkeydown="if(foo){clearTimeout(foo)}"></textarea>
+		<label style="color: gray"><input id="is-html" name="is-html" value="1" type="checkbox" disabled> Interpret as HTML</label>
+		<input id="submit-btn" type="submit" value="Check Spelling" />
+	</form>
+	
+	<iframe id="spellcheck" name="spellcheck" src="spell-post.asp">
+	</iframe>
+
+</body>
+</html>

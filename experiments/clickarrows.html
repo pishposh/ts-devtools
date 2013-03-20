@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<base href="https://www.taskstream.com/CIPreports/"><title>Select Template</title>
+</head>
+<body>
+<style type="text/css">
+
+label.click-arrow { margin: 0 0.5em; }
+
+label.click-arrow input {
+	vertical-align: middle;
+}
+
+.label-text {
+	display: inline-block; /*box-sizing: border-box;*/
+	height: 13px;
+	vertical-align: middle;
+	font: 9px/13px Verdana;
+	border-top: 1px solid #999;
+	border-bottom: 1px solid #999; /* a 15px-tall background image would be more reliable than all this */
+	position: relative;
+	margin-left: 14px;
+	margin-right: 6px;
+}
+.label-text:before {
+	content: url("/css/i/labels/arrowleft.gif"); /* 14 x 15 */
+	position: absolute;
+	left: -14px; top: -1px; /* -1 to account for 1px border */
+}
+.label-text:after {
+	content: url("/css/i/labels/capright.gif"); /* 6 x 15 */
+	position: absolute;
+	right: -6px; top: -1px; /* -1 to account for 1px border */
+}
+</style>
+
+<label class="click-arrow">
+	<input class="radiocheckbox" type="checkbox" name="ckA" id="ckA" />
+	<span class="label-text">Show all participating areas</span>
+</label>
+
+<label class="click-arrow">
+	<input class="radiocheckbox" type="checkbox" name="ckB" id="ckB" />
+	<span class="label-text">View full text</span>
+</label>
+
+<p>This can also be done with pure CSS (but for IE7?).</p>
+
+</body>
+</html>

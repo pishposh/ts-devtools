@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- ha ha, as if -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>ken test frameset</title>
+	</head>
+	<frameset rows="10%,5%,*" framespacing="0" frameborder="0" noresize>
+		<frame name="f1" src="./frame.html" target="_top">
+		<frame name="f2" src="./frame.html" target="_top">
+		<frameset cols="15%,*,5%" framespacing="0" frameborder="0" noresize>
+			<frame name="f3_1" src="./frame.html" target="_top">
+			<frameset rows="5%,*,5%" framespacing="0" frameborder="0" noresize>
+				<frame name="f3_2_1" src="./frame.html" target="_top">
+				<frame name="f3_2_2" src="./ckeditor/_samples/index.html" target="_self">
+				<frame name="f3_2_3" src="./frame.html" target="_top">
+			</frameset>
+			<frame name="f3_3" src="./frame.html" target="_top">
+		</frameset>
+	</frameset>
+</html>

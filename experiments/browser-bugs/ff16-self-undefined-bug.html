@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8">
+        <title>blargh</title>
+    </head>
+    <body>
+        <p>Try this in Firefox/Win 16.0.2. <code>window.self</code> gets zapped after ~40 evals of <code>foo()</code>.</p>
+        
+        <hr>
+        
+        <script>
+
+var x = 0;
+
+function foo() {
+    x += 1; // problem disappears if rewritten as x++
+    document.write(x + (self === window ? " yes, " : " no, "));
+}           // problem disappears if condition rewritten as (window.self === window)
+
+document.write(x)
+document.write("<p>window.self === window? " + (window.self === window ? "YES" : "NO") + "</p>");
+
+document.write("<p>self === window? ");
+for (var i = 0; i < 100; i++) eval("foo()");
+document.write("</p>");
+
+document.write(x)
+document.write("<p>window.self === window? " + (window.self === window ? "YES" : "NO") + "</p>");
+
+        </script>
+        
+    </body>
+</html>

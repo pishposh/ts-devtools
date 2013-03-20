@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>Print me from Safari or Chrome!</title>
+	<style>
+body {background: #eee;}
+#iframe {display: none}
+/*
+#iframe { visibility: hidden; width: 100%; height: 24em; }
+#iframe-wrapper:hover #iframe { visibility: visible; }
+*/
+	</style>
+</head>
+<body>
+		<h1>Print me from Safari or Chrome!</h1>
+		<p>We want to print this visible content, but…</p>
+		<p style="font-size: small; color: gray">(here lurks an iframe...<!-- mouseover to see!-->)</p>
+		<div id="iframe-wrapper"><iframe id="iframe" src="./inner.html"></iframe></div>
+		<!-- p style="font-size: small; color: gray">(end of page)</p -->
+	</body>
+</html>

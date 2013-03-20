@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Site Switch</title>
+	<style>
+
+.choose {
+	font: 48px Calibri, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-align: center;
+	color: #333;
+	margin: 1em 0;
+}
+
+.wrap {
+	position: relative;
+}
+
+.net, .asp {
+	display: block;
+	position: absolute;
+	width: 6em; height: 6em; line-height: 5.75em;
+	max-width: 40%;
+	background: #eee;
+	margin: .25em;
+	border: 0.125em solid #eee;
+	border-radius: .5em; /* won't work in frameset in IE9 due to back-compat CSS parsing inherited from main_frame.asp */
+	font-weight: bold;
+	color: black;
+	text-decoration: none;
+}
+
+.net { background: #cde; border-color: #cde; right: 50%; }
+.net:hover { border-color: #ace; }
+.net:active { background: #ace; }
+
+.asp { background: #edc; border-color: #edc; left: 50%; }
+.asp:hover { border-color: #eca; }
+.asp:active { background: #eca; }
+
+	</style>
+</head>
+<body>
+	<div class="choose">
+		jkxjkxj kjxjkxjk jkxjkx
+		<div class="wrap">
+			<a class="net" href="https://local.REDACTED.org//Folio/WebView/Test?switchArea=3&amp;RedirectPath=%2FFolio%2FWebView%2FTest&amp;qyz=V7EWoB1hYCYpp7oA6jb&amp;folder%5Fid=f7ebf7enzjfxcbzn&amp;bypassSwitch=1">.NET</a><a class="asp" href="/folio/preview.asp?switchArea=3&amp;RedirectPath=%2FFolio%2FWebView%2FTest&amp;qyz=V7EWoB1hYCYpp7oA6jb&amp;folder%5Fid=f7ebf7enzjfxcbzn&amp;bypassSwitch=1">ASP</a>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>I’m in ur iframe</title>
+		<style>
+body { background: white; }
+h1, input { font-size: 60pt; }
+		</style>
+	</head>
+	<body onload="(function(){ var n = document.form1.nickname; n.focus(); n.select(); })();">
+		<h1>I’m in ur iframe</h1>
+		
+		<form name="form1" action="" method="post">
+			<div>
+				<input name="nickname" id="nickname" type="text" value="STEALING UR FOCUS">
+			</div>
+		</form>
+
+	</body>
+</html>

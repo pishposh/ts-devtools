@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+
+#test {
+	box-sizing: border-box;
+	padding: 0.5em;
+	font-family: inherit;
+	font-size: inherit;
+}
+
+.render-div {
+	margin: 2em 0;
+}
+
+.render {
+	border: 1px solid #333;
+	padding: 0.5em;
+}
+
+body {
+	font: 1em/1.5em "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+pre {
+	font-family: "menlo";
+}
+	</style>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<script>
+$(function(){
+	
+	$("#test").bind('input', function(){
+		$("#escape .render").text( escape( $("#test").val() ) );
+		$("#encode .render").text( encodeURIComponent( $("#test").val() ) );
+	});
+	
+	$("#test").trigger('input');
+});
+	</script>
+</head>
+<body>
+	<textarea id="test" style="width:100%; height: 8em;">blargh</textarea>
+	
+	<div class="render-div" id="escape">
+		escape:
+		<pre class="render"></pre>
+	</div>
+	
+	<div class="render-div" id="encode">
+		encodeURIComponent:
+		<pre class="render"></pre>
+	</div>
+</body>
+</html>

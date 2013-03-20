@@ -1,7 +1,10 @@
 #!/usr/local/bin/python
-
-# requires 'chardet' module to be installed (pip install chardet)
-# also requires 'file' utility at /usr/bin/file
+#
+# Quick and dirty script to guess the character encodings of text files
+# (passed in as arguments) using various techniques.
+#
+# Assumes 'chardet' module installed (pip install chardet), also assumes
+# 'file' utility available at /usr/bin/file.
 
 import sys
 import chardet
@@ -63,32 +66,32 @@ def sniff(filename):
         result['chardet_confidence'] = 0
         chardet_string = None
         
-        ## use Mozilla's universal charset detector to guess encoding:
-        #
-        #chardet_result = chardet.detect(data)
-        #result['chardet_encoding'] = chardet_result['encoding']
-        #result['chardet_confidence'] = chardet_result['confidence']
-        #
-        ## attempt decoding as Mozilla's guessed charset:
-        #
-        #chardet_string = None
-        #
-        #if chardet_result['encoding'] is not None:
-        #    try:
-        #        chardet_decoder = codecs.getdecoder(chardet_result['encoding'])
-        #        
-        #        if chardet_decoder is UTF8_DECODER:
-        #            result['chardet_decode_err'] = result['utf8_decode_err']
-        #            chardet_string = utf8_string
-        #            
-        #        else:
-        #            try:
-        #                chardet_string = chardet_decoder(data)[0]
-        #            except UnicodeError as e:
-        #                result['chardet_decode_err'] = str(e)
-        #                
-        #    except LookupError as e:
-        #        result['chardet_decode_err'] = str(e)
+        # use Mozilla's universal charset detector to guess encoding:
+        
+        chardet_result = chardet.detect(data)
+        result['chardet_encoding'] = chardet_result['encoding']
+        result['chardet_confidence'] = chardet_result['confidence']
+        
+        # attempt decoding as Mozilla's guessed charset:
+        
+        chardet_string = None
+        
+        if chardet_result['encoding'] is not None:
+           try:
+               chardet_decoder = codecs.getdecoder(chardet_result['encoding'])
+               
+               if chardet_decoder is UTF8_DECODER:
+                   result['chardet_decode_err'] = result['utf8_decode_err']
+                   chardet_string = utf8_string
+                   
+               else:
+                   try:
+                       chardet_string = chardet_decoder(data)[0]
+                   except UnicodeError as e:
+                       result['chardet_decode_err'] = str(e)
+                       
+           except LookupError as e:
+               result['chardet_decode_err'] = str(e)
             
         # detect line endings:
         

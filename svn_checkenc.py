@@ -1,5 +1,16 @@
 #!/usr/local/bin/python3
 # -*- coding: utf-8 -*-
+#
+# Post-commit hook to email warnings about malformed UTF-8 and UTF-8 BOMs,
+# as applicable.
+#
+# usage: svn_checkenc.py [-h] [--project-name PROJECT_NAME]
+#                        [--svnlook SVNLOOK_LOCATION] [--dump-html]
+#                        [--email-to EMAIL_TO] [--smtp-host SMTP_HOST]
+#                        [--smtp-username SMTP_USERNAME]
+#                        [--smtp-password SMTP_PASSWORD] [--smtp-ssl]
+#                        repo_path revision_num
+
 
 PATHS = [
   # ignore third-party sources:
@@ -201,8 +212,8 @@ def main():
   parser.add_argument( 'repo_path', type=str )
   parser.add_argument( 'revision_num', type=str )
   parser.add_argument( '--project-name', type=str )
-  parser.add_argument( '--svnlook', type=str, help="path to svnlook",
-                          metavar="SVNLOOK_PATH" )
+  parser.add_argument( '--svnlook', type=str, help="location of svnlook",
+                          metavar="SVNLOOK_LOCATION" )
   parser.add_argument( '--dump-html', '--html', action='store_true',
                           help="write html to stdout" )
   parser.add_argument( '--email-to', '-e', action='append', type=str )
