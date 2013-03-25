@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<head>
+<style>
+
+.thumb, input[type=button] {
+  cursor: pointer;
+}
+
+.thumb {
+  display: inline-block;
+  position: relative;
+  width: 120px;
+  margin: 10px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.8);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.using-bg {
+  height: 120px;
+}
+
+.sample-text {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  background-color: black;
+  background-color: rgba(0,0,0,.75);
+  text-align: center;
+  color: white;
+  font: bold 10px helvetica;
+  padding: 4px;
+}
+
+img {
+  height: 120px; width: 120px; display: block;
+}
+
+.gallery {
+  background: #eee;
+  border-radius: 6px;
+  padding: 16px;
+}
+
+h1 { font: bold 12px helvetica; margin: 10px 14px; }
+</style>
+
+</head>
+<body>
+  
+
+<div class="gallery">
+  
+  <div>
+    <h1>recommended:</h1>
+    
+    <span class="thumb using-bg" style="background: url('./i/bolt.jpg')"><!-- has to be span, not div, for IE7 -->
+      <span class="sample-text">Theme sample</span>
+    </span>
+    
+    <span class="thumb using-bg" style="background: url('./i/mega.jpg')">
+      <span class="sample-text">Theme sample</span>
+    </span>
+    
+    <span class="thumb using-bg" style="background: url('./i/limecat.jpg')">
+      <span class="sample-text">Theme sample</span>
+    </span>
+    
+    <span class="thumb using-bg" style="background: url('./i/bolt.jpg')">
+      <span class="sample-text">Theme sample</span>
+    </span>
+  </div>
+  
+  <div style="margin-top: 20px">
+    <h1>alternatives:</h1>
+
+    <a href="https://www.taskstream.com/"><span class="thumb">
+      <img src="./i/cafecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span></a>
+
+    <span class="thumb">
+      <img src="./i/mega.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text"><input type="button" value="Select theme"></span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+
+    <span class="thumb">
+      <img src="./i/limecat.jpg" style="width: 120px; height: 120px;">
+      <span class="sample-text">Theme sample</span>
+    </span>
+  </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+$(document).on("click", ".thumb:not(a *)", function() {
+  alert("hi");
+});
+
+</script>
+
+</body>
