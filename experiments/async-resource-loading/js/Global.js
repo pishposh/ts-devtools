@@ -10,7 +10,7 @@
   }
 }(this, function() {
   Global = {
-    netDns: "https://w.taskstream.com/",
+    netDns: "https://subdomain.example.com/",
     IsDotNetHost: true
   };
   

@@ -1,9 +1,6 @@
 /**
  *  current: $.initAjaxTsTunnel(function(){ $.ajax(...sync or async...) })
  *
- *  todo:
- *  init frame automatically for async $.ajax requests, complain to devs about sync requests
- *  
  *  $.initAjaxAspToNet().then(function(){
  *      ...show page to user...
  *  })
@@ -11,6 +8,9 @@
  *  $.initAjaxAspToNet().then(function(){
  *      $.ajax("//w.taskstream.com/...", ...)
  *  })
+ *
+ *  todo:
+ *  init frame automatically for async $.ajax requests, complain to devs about sync requests  
  */
 
 // github.com/umdjs/umd
@@ -54,7 +54,7 @@
       return initDeferred.promise();
     
     tunnelIframe = $("<iframe></iframe>")
-      .attr("src", netDns + "/XhrTunnelShim")
+      .attr("src", netDns + "/XhrTunnelShim") // blank page that just sets document.domain to our (shared) second-level domain
       .on("load", installXhrOverride)
       .appendTo("head")[0];
     
