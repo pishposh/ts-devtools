@@ -12,9 +12,10 @@
  *      $.ajax("//w.taskstream.com/...", ...)
  *  })
  */
+
+// github.com/umdjs/umd
  
- 
- // Uses AMD or browser globals to create a jQuery plugin.
+// Uses AMD or browser globals to create a jQuery plugin.
 
 // It does not try to register in a CommonJS environment since
 // jQuery is not likely to run in those environments.

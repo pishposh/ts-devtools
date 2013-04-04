@@ -1,4 +1,5 @@
 // current Global.* stuff here
+// github.com/umdjs/umd
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {

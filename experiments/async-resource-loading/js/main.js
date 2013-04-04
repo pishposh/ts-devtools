@@ -7,7 +7,7 @@ require.config({
 require(["TS", "jquery"], function(TS, $) {
   
   $(function(){
-    $("body").prepend("<p>Hello from main.js, where TS.hello is " + TS.hello + "!</p>");
+    $("#dynamic-content").append("<p>Hello from main.js, where TS.hello is " + TS.hello + "!</p>");
   });
   
 });
